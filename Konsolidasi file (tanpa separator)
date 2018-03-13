@@ -1,1 +1,44 @@
+Konsolidasi File (Tanpa Separator)
+
+definisi:
+sequential file yang terurut dimana arsip tersebut mengandung kelompok-kelompok data dengan kunci yang sama 
+yang harus diproses sebagai satu kesatuan dan mengenali adanya kelompok yang lain karena kunci berubah.
+
+Berikut ini adalah algoritma umum untuk konsolidasi tanpa separator:
+
+Judul  	: Algoritma Global Konsolidasi dengan Tanpa Separator (dengan penanganan file kosong)
+Kamus	:- Type rekaman : <KeyIn : keytype, ValIn : valtype>
+	 - ArsipIn : Sequential file
+	   *Rekln : rekaman/record
+	   1)(MARK,VAL) := EOF (.)
+	 - Prosedur Inisialisasi_Seluruh_Kategori
+	 - Prosedur Terminasi_Seluruh_Kategori
+	 - Prosedur Kasus_Kosong
+	 - Prosedur Inisialisasi_Kategori
+	 - Prosedur Proses_Elemen_Pertama
+	 - Prosedur Proses_Current_Kategori
+	 - Prosedur Terminasi_Kategori
+	 - Prosedur Inisialisasi_Kategori
+Algoritma :
+     OPEN(ArsipIn,RekIn)
+     IF EOF(ArsipIn)
+     THEN
+          Kasus_Kosong	{Mendefinisikan file kosong}
+     ELSE
+          Inisialisasi_Seluruh_Kategori
+          REPEAT
+
+               Inisialisasi_Kategori
+               Current_Kategori ßRekln.KeyIn
+               Proses_Elemen_Pertama
+               REPEAT
+                    Proses_Current_Kategori
+                    READ(ArsipIn,RekIn)
+               UNTIL Current_Kategori <> RekIn.KeyIn
+               Terminasi_Kategori
+
+          UNTIL EOF(ArsipIn)
+          Terminasi_Seluruh_Kategori
+          CLOSE(ArsipIn)
+     END IF
 
